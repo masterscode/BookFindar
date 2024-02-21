@@ -4,8 +4,7 @@ package com.findar.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,6 +12,7 @@ import java.util.Objects;
 
 
 @Data
+@Where(clause = "delFlag = N")
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 

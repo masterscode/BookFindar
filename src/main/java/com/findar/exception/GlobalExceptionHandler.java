@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,14 +38,13 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(
                 ApiResponse.builder()
-                        .data(String.valueOf(UUID.randomUUID()))
                         .message(errorMessage)
                         .build(),
                 status);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ApiResponse<Object>> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         List<ObjectError> globalErrors = ex.getBindingResult().getGlobalErrors();
@@ -59,7 +59,10 @@ public class GlobalExceptionHandler {
             errors.add(error);
         }
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ApiResponse.builder()
+                .message("There's an error with request data")
+                .error(errors)
+                .build(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DuplicateEntityException.class)
@@ -82,6 +85,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorisedException.class)
     public ResponseEntity<?> handleUnauthorisedException(UnauthorisedException ex) {
         return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 

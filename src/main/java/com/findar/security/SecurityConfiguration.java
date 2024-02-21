@@ -38,10 +38,9 @@ public class SecurityConfiguration {
             "/actuator",
             "/health",
             "/actuator/**",
-            "/banks/**",
             "/favicon.ico",
             "/actuator/health",
-            "/login",
+            "/auth/**",
 
     };
 
@@ -56,7 +55,6 @@ public class SecurityConfiguration {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .userDetailsService(userService)
                 .formLogin(AbstractHttpConfigurer::disable)
-//                .passwordManagement(p -> p.)
                 .build();
 
     }

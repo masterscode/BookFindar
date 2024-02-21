@@ -9,6 +9,7 @@
 package com.findar.role.model;
 
 import com.findar.common.BaseEntity;
+import com.findar.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,8 +28,11 @@ public class Role extends BaseEntity {
 
     @Column(unique = true)
     private String name;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Permission> permissions;
 
+    @OneToMany(mappedBy = "role")
+    private Set<User> users;
 
 }
