@@ -1,0 +1,48 @@
+
+Take-Home Test for Mid-Level Java Backend Engineer
+
+Objective:
+Design and implement a RESTful API for a simple online bookstore.
+
+Requirements:
+
+1. API Implementation:
+   - Use Java with Spring Boot framework.
+   - The API should allow users to:
+     - View a list of available books.
+     - Add new books to the store.
+     - Update book details.
+     - Delete books from the store.
+
+2. Database Integration:
+   - Use a relational database (e.g., H2, MySQL, PostgreSQL).
+   - Use JPA for database interactions.
+   - Implement CRUD operations for the book entity.
+
+3. Business Logic:
+   - Manage the availability status of books.
+
+4. Testing:
+   - Write a few unit test.
+
+5. Documentation:
+   - Provide a README with setup instructions, design explanation, and API documentation.
+
+6. Error Handling:
+   - Implement proper error handling and HTTP status codes.
+
+7. Bonus (Optional):
+   - Add authentication for API endpoints.
+   - Implement a simple front-end client.
+
+Evaluation Criteria:
+- Code quality and readability.
+- Correct implementation of requirements.
+- Effective use of Spring Boot and JPA.
+- Robustness of tests.
+- Documentation and ease of use.
+
+Submission Guidelines:
+- Submit code via GitHub.
+- Code should be well-commented and follow best practices.
+- The project should be runnable in a standard dev environment.
