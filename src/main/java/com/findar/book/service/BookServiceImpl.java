@@ -2,6 +2,7 @@ package com.findar.book.service;
 
 
 import com.findar.book.dto.CreateBookDto;
+import com.findar.book.dto.UpdateBookDto;
 import com.findar.book.model.Book;
 import com.findar.book.repository.BookRepository;
 import com.findar.common.ApiResponse;
@@ -63,7 +64,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public ApiResponse<Book> updateBook(Long bookId, CreateBookDto dto) {
+    public ApiResponse<Book> updateBook(Long bookId, UpdateBookDto dto) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("Unknown book"));
 
@@ -81,8 +82,11 @@ public class BookServiceImpl implements BookService {
     public ApiResponse<Book> deleteBook(Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("Unknown book"));
-        bookRepository.delete(book);
-
+        // JPA @SQLDelete throws exception
+//        bookRepository.delete(book);
+        book.setDelFlag("N");
+        book.setDeletedOn(LocalDateTime.now());
+        bookRepository.save(book);
         return ApiResponse.<Book>builder()
                 .message("Book deleted successfully")
                 .data(book)

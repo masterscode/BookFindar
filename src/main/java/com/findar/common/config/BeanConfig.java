@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.findar.common.JsonUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,21 +22,11 @@ public class BeanConfig {
     @Bean
     @Primary
     public ObjectMapper objectMapper() {
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(LocalDateTime.class, new JsonDateSerializer.LocalDateTimeSerializer());
-        module.addDeserializer(LocalDateTime.class, new JsonDateSerializer.LocalDateTimeDeserializer());
-
-        return new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE)
-                .registerModule(module)
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
+        return JsonUtil.objectMapper;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

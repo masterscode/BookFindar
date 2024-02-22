@@ -1,6 +1,7 @@
 package com.findar.book.service;
 
 import com.findar.book.dto.CreateBookDto;
+import com.findar.book.dto.UpdateBookDto;
 import com.findar.book.model.Book;
 import com.findar.common.ApiResponse;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ public interface BookService {
 
     ApiResponse<Book> getBook(Long bookId);
 
-    ApiResponse<Book> updateBook(Long bookId, CreateBookDto dto);
+    ApiResponse<Book> updateBook(Long bookId, UpdateBookDto dto);
 
     ApiResponse<Book> deleteBook(Long bookId);
 }

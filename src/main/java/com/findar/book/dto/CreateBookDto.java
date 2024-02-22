@@ -2,16 +2,22 @@ package com.findar.book.dto;
 
 
 import com.findar.book.model.Book;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
 public class CreateBookDto {
+    @NotBlank(message = " is required")
     private String title;
+    @NotBlank(message = " is required")
     private String author;
+    @NotBlank(message = " is required")
     private String isbn;
-    private double price;
+    @DecimalMin(value = "100.0")
+    @NotNull(message = " is required")
+    private Double price;
 
-    public Book toEntity(){
+    public Book toEntity() {
         Book book = new Book();
         book.setAuthor(author);
         book.setTitle(title);

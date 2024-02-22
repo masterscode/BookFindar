@@ -2,6 +2,8 @@
 package com.findar.common;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.findar.common.config.JsonDateSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.*;
@@ -25,15 +27,15 @@ public abstract class BaseEntity implements Serializable {
 
     protected String delFlag = "N";
 
-    //    @JsonSerialize(using = CustomSerializers.LocalDateSerializer.class)
+    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime deletedOn;
 
     @UpdateTimestamp
-//    @JsonSerialize(using = CustomSerializers.LocalDateSerializer.class)
+    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime updatedOn;
 
     @CreationTimestamp
-//    @JsonSerialize(using = CustomSerializers.LocalDateSerializer.class)
+    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime dateCreated = LocalDateTime.now();
 
 
@@ -45,9 +47,4 @@ public abstract class BaseEntity implements Serializable {
 
         return false;
     }
-
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
 }

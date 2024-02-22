@@ -1,6 +1,7 @@
 package com.findar.book.service;
 
 import com.findar.book.dto.CreateBookDto;
+import com.findar.book.dto.UpdateBookDto;
 import com.findar.book.model.Book;
 import com.findar.book.repository.BookRepository;
 import com.findar.common.ApiResponse;
@@ -144,15 +145,13 @@ class BookServiceImplTest {
     @Test
     void shouldThrowExceptionForNonExistentBookForUpdate() {
         Mockito.when(bookRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
-        Assertions.assertThrows(BadRequestException.class, () -> underTest.updateBook(1L, new CreateBookDto()));
+        Assertions.assertThrows(BadRequestException.class, () -> underTest.updateBook(1L, new UpdateBookDto()));
     }
     @Test
     void shouldUpdateBook() {
-        CreateBookDto dto = new CreateBookDto();
-        dto.setIsbn("mocked-isbn");
+        UpdateBookDto dto = new UpdateBookDto();
         dto.setPrice(3500.0);
         dto.setTitle("GoF");
-        dto.setAuthor("Erich Gamma");
 
         Book book = new Book();
         book.setIsbn(RandomStringUtils.randomAlphanumeric(8));
@@ -191,6 +190,6 @@ class BookServiceImplTest {
 
         underTest.deleteBook(1L);
 
-        Mockito.verify(bookRepository, Mockito.times(1)).delete(Mockito.any(Book.class));
+        Mockito.verify(bookRepository, Mockito.times(1)).save(Mockito.any(Book.class));
     }
 }

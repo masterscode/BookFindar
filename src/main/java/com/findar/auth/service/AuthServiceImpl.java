@@ -7,6 +7,8 @@ import com.findar.common.ApiResponse;
 import com.findar.common.JsonUtil;
 import com.findar.exception.BadRequestException;
 import com.findar.security.JWTUtil;
+import com.findar.user.model.User;
+import com.findar.user.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +23,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    private final UserDetailsService userDetailsService;
+    private final UserServiceImpl userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public ApiResponse<LoginResponse> doLogin(LoginRequest request) {
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+        final User userDetails = userService.loadUser(request.getUsername());
 
         if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword()))
             throw new BadRequestException("Invalid username/password combination");

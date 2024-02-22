@@ -2,6 +2,7 @@ package com.findar.book.controller;
 
 
 import com.findar.book.dto.CreateBookDto;
+import com.findar.book.dto.UpdateBookDto;
 import com.findar.book.model.Book;
 import com.findar.book.service.BookService;
 import com.findar.common.ApiResponse;
@@ -53,8 +54,8 @@ public class BookController {
     }
 
 
-    @PutMapping("/{bookId}")
-    public ResponseEntity<ApiResponse<Book>> updateBook(@PathVariable Long bookId, @Valid @RequestBody CreateBookDto dto) {
+    @PatchMapping("/{bookId}")
+    public ResponseEntity<ApiResponse<Book>> updateBook(@PathVariable Long bookId, @Valid @RequestBody UpdateBookDto dto) {
         return ResponseEntity.ok(
                 bookService.updateBook(bookId, dto)
         );

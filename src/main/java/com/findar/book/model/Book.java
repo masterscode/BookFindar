@@ -3,6 +3,7 @@ package com.findar.book.model;
 import com.findar.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -10,7 +11,8 @@ import org.hibernate.annotations.SQLDelete;
 @Getter
 @Setter
 @Entity
-@SQLDelete(sql = "UPDATE Book SET delFlag='Y' where id=?")
+//@Table(name = "books")
+//@SQLDelete(sql = "UPDATE book SET del_flag='Y' where id = ?1")
 public class Book extends BaseEntity {
 
     private String title;
