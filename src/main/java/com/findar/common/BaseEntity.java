@@ -12,7 +12,6 @@ import java.util.Objects;
 
 
 @Data
-@Where(clause = "delFlag = N")
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 

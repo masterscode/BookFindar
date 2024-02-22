@@ -9,6 +9,7 @@ import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +68,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateEntityException.class)
     public ResponseEntity<?> handleDuplicateEntityException(DuplicateEntityException ex) {
+        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
+    public ResponseEntity<?> handleDuplicateEntityException(IncorrectResultSizeDataAccessException ex) {
         return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
@@ -163,17 +169,17 @@ public class GlobalExceptionHandler {
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ApiResponse<Object>> handleException(final Exception e) {
         e.printStackTrace();
+        return ResponseEntity.internalServerError()
+                .body(ApiResponse.builder()
+                        .error(Arrays.toString(e.getStackTrace()))
+                        .message("An  unknown error has occurred, try again.")
+                        .build());
 
-        return getExceptionResponseResponseEntity(
-                "An  unknown error has occurred, try again.",
-                HttpStatus.INTERNAL_SERVER_ERROR
-        );
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<?> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
         return getExceptionResponseResponseEntity(NestedExceptionUtils.getMostSpecificCause(ex).getMessage(), HttpStatus.BAD_REQUEST);
-
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

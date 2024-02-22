@@ -14,6 +14,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -30,9 +31,9 @@ public class Role extends BaseEntity {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Permission> permissions;
+    private Set<Permission> permissions = new HashSet<>();
 
     @OneToMany(mappedBy = "role")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
 }
