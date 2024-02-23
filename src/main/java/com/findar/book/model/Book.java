@@ -22,5 +22,5 @@ public class Book extends BaseEntity {
     private String isbn;
     private double price;
     @Enumerated(EnumType.STRING)
-    private BookStatus status;
+    private BookStatus status = BookStatus.AVAILABLE;
 }
