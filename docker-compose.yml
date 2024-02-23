@@ -11,7 +11,7 @@ services:
     ports:
       - '7000:3306'
     networks:
-      - loc-net
+      - loki
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
@@ -32,7 +32,7 @@ services:
        mysql:
          condition: service_healthy
     networks:
-      - loc-net
+      - loki
 
 networks:
   loc-net:
