@@ -1,4 +1,4 @@
-package com.findar.common;
+package com.findar.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -7,7 +7,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,13 +18,13 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
+        //Meta data for documentation can be externalized
         final String securitySchemeName = "bearerAuth";
-        final String apiTitle = String.format("%s API", StringUtils.capitalize("apiProperty.moduleName()"));
-        final String apiDescription = String.format("API for %s. Contains protected end points.", "apiProperty.appName()");
+        final String apiDescription = "Implementation of a RESTful API for a simple online bookstore";
         final Contact apiContact = new Contact()
-                .name("apiProperty.moduleName()")
-                .url("apiProperty.appWebsite()")
-                .email("apiProperty.appSupportEmail()");
+                .name("Emmanuel Ogbinaka")
+                .url("https://github.com/masterscode/BookFindar")
+                .email("ogbinakaemmanuel@gmail.com");
         return new OpenAPI()
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(
@@ -39,10 +38,11 @@ public class OpenApiConfig {
                                 )
                 )
                 .info(new Info()
-                        .title(apiTitle)
+                        .title("Book Store")
                         .description(apiDescription)
                         .termsOfService("Terms of service")
                         .contact(apiContact)
-                        .version("v1"));
+                        .version("v1")
+                );
     }
 }
