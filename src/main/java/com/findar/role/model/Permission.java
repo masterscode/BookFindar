@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "permissions")
+@Entity(name = "findar_permissions")
 public class Permission  extends BaseEntity {
     @Serial
     private static final long serialVersionUID = -344143629178093163L;
@@ -24,7 +24,7 @@ public class Permission  extends BaseEntity {
     private String description;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
     private Set<Role> role;
 
 }
