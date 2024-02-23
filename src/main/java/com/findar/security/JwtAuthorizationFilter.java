@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Slf4j
-//@Order(1)
 @Component
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {

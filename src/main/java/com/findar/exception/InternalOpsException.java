@@ -1,10 +1,3 @@
-/*
- * *
- *  * Created by Kolawole Omirin
- *  * Copyright (c) 2023 . All rights reserved.
- *  * Last modified 11/15/23, 3:19 PM
- *
- */
 
 package com.findar.exception;
 

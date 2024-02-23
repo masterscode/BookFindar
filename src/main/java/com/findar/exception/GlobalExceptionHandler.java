@@ -82,12 +82,6 @@ public class GlobalExceptionHandler {
         return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
-    @ExceptionHandler(PermissionException.class)
-    public ResponseEntity<?> handlePermissionException(PermissionException ex) {
-        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.FORBIDDEN);
-    }
-
     @ExceptionHandler(UnauthorisedException.class)
     public ResponseEntity<?> handleUnauthorisedException(UnauthorisedException ex) {
         return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.UNAUTHORIZED);

@@ -35,7 +35,7 @@ Implemented error handling mechanisms to return appropriate HTTP status codes an
 ## Testing
 Developed a suite of unit tests to validate the functionality of the API endpoints logic and ensure correctness under various scenarios. Unit tests had a coverage of over 70%.
 ## Security
-**Authentication**: Authentication can be added to API endpoints for enhanced security. This feature is optional but recommended for production environments.
+**Authentication**: Authentication can be added to API endpoints for enhanced security. This was implemented with Spring Security module, using JWT tokens as the means of authorisation while username/password for authentication. 
 
 
 # Setup Instructions

@@ -1,11 +1,3 @@
-/*
- * *
- *  * Created by Kolawole Omirin
- *  * Copyright (c) 2023 . All rights reserved.
- *  * Last modified 8/23/23, 1:54 PM
- *
- */
-
 package com.findar.role.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
