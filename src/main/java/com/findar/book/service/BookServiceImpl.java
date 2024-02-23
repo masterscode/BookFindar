@@ -83,8 +83,6 @@ public class BookServiceImpl implements BookService {
 
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("Unknown book"));
         bookRepository.delete(book);
-
-        bookRepository.save(book);
         return ApiResponse.<Book>builder()
                 .message("Book deleted successfully")
                 .data(book)

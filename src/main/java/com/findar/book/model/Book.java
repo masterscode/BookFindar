@@ -14,7 +14,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Entity
 @Table(name = "books")
 @SQLRestriction(value = "deleted = false")
-@SQLDelete(sql = "UPDATE book SET deleted= false where id = ?1")
+@SQLDelete(sql = "UPDATE books SET deleted= true where id = ? and version = ?")
 public class Book extends BaseEntity {
 
     private String title;
