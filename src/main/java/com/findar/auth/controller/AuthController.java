@@ -1,11 +1,14 @@
 package com.findar.auth.controller;
 
+import com.findar.auth.dto.CreateUserRequest;
 import com.findar.auth.dto.LoginRequest;
 import com.findar.auth.dto.LoginResponse;
+import com.findar.auth.dto.UserDto;
 import com.findar.auth.service.AuthService;
 import com.findar.common.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +27,13 @@ public class AuthController {
     public ResponseEntity<ApiResponse<LoginResponse>> doLogin(@Valid @RequestBody LoginRequest request) {
 
         return ResponseEntity.ok(authService.doLogin(request));
+
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<UserDto>> register(@Valid @RequestBody CreateUserRequest request) {
+
+        return new ResponseEntity<>(authService.register(request), HttpStatus.CREATED);
 
     }
 }

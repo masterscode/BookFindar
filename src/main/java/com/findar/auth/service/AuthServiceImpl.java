@@ -1,13 +1,16 @@
 package com.findar.auth.service;
 
 
+import com.findar.auth.dto.CreateUserRequest;
 import com.findar.auth.dto.LoginRequest;
 import com.findar.auth.dto.LoginResponse;
+import com.findar.auth.dto.UserDto;
 import com.findar.common.ApiResponse;
 import com.findar.common.JsonUtil;
 import com.findar.exception.BadRequestException;
 import com.findar.security.JWTUtil;
 import com.findar.user.model.User;
+import com.findar.user.service.UserService;
 import com.findar.user.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -42,6 +45,15 @@ public class AuthServiceImpl implements AuthService {
         return ApiResponse.<LoginResponse>builder()
                 .message("User successfully authenticated")
                 .data(new LoginResponse(token, userDetails.getUsername(), authorities))
+                .build();
+    }
+
+    @Override
+    public ApiResponse<UserDto> register(CreateUserRequest request) {
+
+        return ApiResponse.<UserDto>builder()
+                .data(new UserDto(userService.createUser(request)))
+                .message("User successfully created")
                 .build();
     }
 }
