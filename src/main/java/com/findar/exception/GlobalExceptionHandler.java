@@ -66,11 +66,6 @@ public class GlobalExceptionHandler {
                 .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DuplicateEntityException.class)
-    public ResponseEntity<?> handleDuplicateEntityException(DuplicateEntityException ex) {
-        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
     @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
     public ResponseEntity<?> handleDuplicateEntityException(IncorrectResultSizeDataAccessException ex) {
         return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.CONFLICT);
