@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
   servlet:
     context-path: /api/v1
 
@@ -8,7 +8,8 @@ spring:
     path match:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:mysql://localhost:3306/findar_book_app
+    url: jdbc:mysql://mysql-db:3306/findar_book_app
+#    url: jdbc:mysql://localhost:3306/findar_book_app
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: password

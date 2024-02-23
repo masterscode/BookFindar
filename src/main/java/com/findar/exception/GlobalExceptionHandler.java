@@ -77,9 +77,9 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> handleNoRecordException(ResourceNotFoundException ex) {
-        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(InternalOpsException.class)
+    public ResponseEntity<?> handleNoRecordException(InternalOpsException ex) {
+        return getExceptionResponseResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

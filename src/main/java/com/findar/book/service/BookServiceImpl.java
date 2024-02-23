@@ -82,11 +82,7 @@ public class BookServiceImpl implements BookService {
     public ApiResponse<Book> deleteBook(Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("Unknown book"));
-        // JPA @SQLDelete throws exception
-//        bookRepository.delete(book);
-        book.setDelFlag("N");
-        book.setDeletedOn(LocalDateTime.now());
-        bookRepository.save(book);
+        bookRepository.delete(book);
         return ApiResponse.<Book>builder()
                 .message("Book deleted successfully")
                 .data(book)

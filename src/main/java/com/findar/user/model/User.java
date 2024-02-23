@@ -6,6 +6,7 @@ import com.findar.role.model.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
@@ -22,7 +23,8 @@ import java.util.stream.Collectors;
 @Setter
 @Entity
 @Table(name = "findar_users")
-@SQLRestriction("del_flag = 'N'")
+@SQLRestriction("deleted = false")
+@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity implements UserDetails {
 
     private String username;

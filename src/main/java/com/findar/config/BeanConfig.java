@@ -1,4 +1,4 @@
-package com.findar.common.config;
+package com.findar.config;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
