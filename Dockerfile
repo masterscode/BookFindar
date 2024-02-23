@@ -8,7 +8,6 @@ COPY pom.xml /app
 
 RUN mvn clean install
 
-#RUN ls -lh /app/target
 
 FROM maven:3.8-openjdk-17
 
