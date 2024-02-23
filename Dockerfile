@@ -1,7 +1,21 @@
-FROM eclipse-temurin:17-alpine
+FROM maven:3.8-openjdk-17 AS build
 
-VOLUME /tmp
+COPY src /app/src
 
-COPY target/FinderBookApp.jar FinderBookApp.jar
+WORKDIR /app
 
-ENTRYPOINT ["java", "-jar", "FinderBookApp.jar"]
+COPY pom.xml /app
+
+RUN mvn clean install -DskipTests
+
+#RUN ls -lh /app/target
+
+FROM maven:3.8-openjdk-17
+
+WORKDIR /app
+
+COPY --from=build /app/target/FinderBookApp.jar FinderBookApp.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","FinderBookApp.jar"]
