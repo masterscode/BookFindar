@@ -1,9 +1,8 @@
 package com.findar.book.model;
 
+import com.findar.book.enums.BookStatus;
 import com.findar.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -22,4 +21,6 @@ public class Book extends BaseEntity {
     @Column(unique = true)
     private String isbn;
     private double price;
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;
 }

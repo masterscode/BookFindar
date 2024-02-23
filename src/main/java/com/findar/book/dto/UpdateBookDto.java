@@ -1,5 +1,6 @@
 package com.findar.book.dto;
 
+import com.findar.book.enums.BookStatus;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,4 +13,7 @@ public class UpdateBookDto {
     private Double price;
     @NotBlank(message = " is required")
     private String title;
+
+    private BookStatus status;
+
 }

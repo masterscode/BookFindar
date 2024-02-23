@@ -70,6 +70,7 @@ public class BookServiceImpl implements BookService {
 
         book.setPrice(dto.getPrice());
         book.setTitle(dto.getTitle());
+        book.setStatus(dto.getStatus());
         bookRepository.save(book);
 
         return ApiResponse.<Book>builder()

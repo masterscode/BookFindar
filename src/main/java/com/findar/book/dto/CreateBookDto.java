@@ -1,6 +1,7 @@
 package com.findar.book.dto;
 
 
+import com.findar.book.enums.BookStatus;
 import com.findar.book.model.Book;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class CreateBookDto {
         book.setAuthor(author);
         book.setTitle(title);
         book.setIsbn(isbn);
+        book.setStatus(BookStatus.AVAILABLE);
         book.setPrice(price);
         return book;
     }

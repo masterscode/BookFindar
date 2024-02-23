@@ -2,6 +2,7 @@ package com.findar.book.service;
 
 import com.findar.book.dto.CreateBookDto;
 import com.findar.book.dto.UpdateBookDto;
+import com.findar.book.enums.BookStatus;
 import com.findar.book.model.Book;
 import com.findar.book.repository.BookRepository;
 import com.findar.common.ApiResponse;
@@ -74,6 +75,7 @@ class BookServiceImplTest {
         Book mockedBook = dto.toEntity();
         mockedBook.setDateCreated(LocalDateTime.now());
         mockedBook.setId(1L);
+        mockedBook.setStatus(BookStatus.AVAILABLE);
         mockedBook.setDeleted(false);
 
         Mockito.when(bookRepository.save(Mockito.any(Book.class))).thenReturn(mockedBook);
@@ -119,6 +121,7 @@ class BookServiceImplTest {
         Book book = new Book();
         book.setIsbn("mocked-isbn");
         book.setPrice(1500.0);
+        book.setStatus(BookStatus.AVAILABLE);
         book.setTitle("Gang of four");
         book.setAuthor("Erich Gamma");
 
@@ -152,6 +155,7 @@ class BookServiceImplTest {
         UpdateBookDto dto = new UpdateBookDto();
         dto.setPrice(3500.0);
         dto.setTitle("GoF");
+        dto.setStatus(BookStatus.AVAILABLE);
 
         Book book = new Book();
         book.setIsbn(RandomStringUtils.randomAlphanumeric(8));
@@ -173,6 +177,7 @@ class BookServiceImplTest {
         Book captured = bookArgumentCaptor.getValue();
         Assertions.assertEquals(dto.getPrice(), captured.getPrice());
         Assertions.assertEquals(dto.getTitle(), captured.getTitle());
+        Assertions.assertEquals(dto.getStatus(), captured.getStatus());
     }
 
     @Test
