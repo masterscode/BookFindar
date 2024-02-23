@@ -3,7 +3,7 @@ package com.findar.common;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.findar.common.config.JsonDateSerializer;
+import com.findar.config.JsonDateSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.*;
@@ -25,26 +25,31 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    protected String delFlag = "N";
-
-    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
-    protected LocalDateTime deletedOn;
+    @Column(columnDefinition = "bit default 0", nullable = false)
+    protected boolean deleted = false;
 
     @UpdateTimestamp
     @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime updatedOn;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseEntity that)) return false;
+        return version == that.version
+                && deleted == that.deleted
+                && Objects.equals(id, that.id)
+                && Objects.equals(updatedOn, that.updatedOn)
+                && Objects.equals(dateCreated, that.dateCreated);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(version, id, deleted, updatedOn, dateCreated);
+    }
+
     @CreationTimestamp
     @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime dateCreated = LocalDateTime.now();
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof BaseEntity base) {
-            return Objects.equals(base.id, this.id);
-        }
-
-        return false;
-    }
 }

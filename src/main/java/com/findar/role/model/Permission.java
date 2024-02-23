@@ -1,11 +1,12 @@
 package com.findar.role.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.findar.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serial;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,6 +23,8 @@ public class Permission  extends BaseEntity {
     private String name;
     private String description;
 
-
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Role> role;
 
 }
