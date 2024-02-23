@@ -74,7 +74,7 @@ class BookServiceImplTest {
         Book mockedBook = dto.toEntity();
         mockedBook.setDateCreated(LocalDateTime.now());
         mockedBook.setId(1L);
-        mockedBook.setDelFlag("N");
+        mockedBook.setDeleted(false);
 
         Mockito.when(bookRepository.save(Mockito.any(Book.class))).thenReturn(mockedBook);
         ApiResponse<Book> result = underTest.addBook(dto);
@@ -124,7 +124,7 @@ class BookServiceImplTest {
 
         book.setDateCreated(LocalDateTime.now());
         book.setId(1L);
-        book.setDelFlag("N");
+        book.setDeleted(false);
         Mockito.when(bookRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(book));
 
 
@@ -161,7 +161,7 @@ class BookServiceImplTest {
 
         book.setDateCreated(LocalDateTime.now());
         book.setId(1L);
-        book.setDelFlag("N");
+        book.setDeleted(false);
         Mockito.when(bookRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(book));
 
 
@@ -185,11 +185,11 @@ class BookServiceImplTest {
 
         book.setDateCreated(LocalDateTime.now());
         book.setId(1L);
-        book.setDelFlag("N");
+        book.setDeleted(false);
         Mockito.when(bookRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(book));
 
         underTest.deleteBook(1L);
 
-        Mockito.verify(bookRepository, Mockito.times(1)).save(Mockito.any(Book.class));
+        Mockito.verify(bookRepository, Mockito.times(1)).delete(Mockito.any(Book.class));
     }
 }
