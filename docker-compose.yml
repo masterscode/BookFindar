@@ -35,5 +35,5 @@ services:
       - loki
 
 networks:
-  loc-net:
+  loki:
     driver: bridge
