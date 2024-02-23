@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY pom.xml /app
 
-RUN mvn clean install -DskipTests
+RUN mvn clean install
 
 #RUN ls -lh /app/target
 

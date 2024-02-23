@@ -1,20 +1,17 @@
+version: '3.8'
+
 services:
 
   mysql:
-    container_name: 'findar_book_app_db'
-    image: 'mysql:latest'
+    container_name: 'mysql-db'
+    image: 'mysql:5.7'
     environment:
       MYSQL_DATABASE: 'findar_book_app'
       MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'password'
     ports:
-      - '3306:3306'
-    volumes:
-      - './data/db:/var/lib/mysql'
+      - '7000:3306'
     networks:
       - loc-net
-
 
   app:
     build:
@@ -34,4 +31,3 @@ services:
 networks:
   loc-net:
     driver: bridge
-
