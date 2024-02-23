@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.findar.config.JsonDateSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -32,6 +33,10 @@ public abstract class BaseEntity implements Serializable {
     @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
     protected LocalDateTime updatedOn;
 
+    @CreationTimestamp
+    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
+    protected LocalDateTime dateCreated = LocalDateTime.now();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,8 +53,5 @@ public abstract class BaseEntity implements Serializable {
         return Objects.hash(version, id, deleted, updatedOn, dateCreated);
     }
 
-    @CreationTimestamp
-    @JsonSerialize(using = JsonDateSerializer.LocalDateTimeSerializer.class)
-    protected LocalDateTime dateCreated = LocalDateTime.now();
 
 }

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -34,6 +35,7 @@ public class JsonDateSerializer {
 
         @Override
         public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            if (Objects.isNull(value)) return;
             gen.writeString(formatter.format(value));
         }
     }

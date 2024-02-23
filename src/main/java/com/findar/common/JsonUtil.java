@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.findar.config.JsonDateSerializer;
+import com.findar.exception.InternalOpsException;
 import lombok.SneakyThrows;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class JsonUtil {
         try {
             return objectMapper.readValue(o, type);
         } catch (Exception e) {
-            throw new RuntimeException("Error while parsing json " + e.getMessage());
+            throw new InternalOpsException("Error while parsing json: " + e.getMessage());
         }
     }
 }

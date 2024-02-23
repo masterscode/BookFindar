@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
         if (!passwordEncoder.matches(request.getPassword(), userDetails.getPassword()))
             throw new BadRequestException("Invalid username/password combination");
 
-        final String userDetailsJson = JsonUtil.toJson(userDetails);
+        final String userDetailsJson = JsonUtil.toJson(new UserDto(userDetails));
         final String token = JWTUtil.createToken(userDetailsJson);
         Collection<String> authorities = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
