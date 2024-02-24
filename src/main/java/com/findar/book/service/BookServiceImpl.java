@@ -74,7 +74,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.save(book);
 
         return ApiResponse.<Book>builder()
-                .message("Book retrieved successfully")
+                .message("Book updated successfully")
                 .data(book)
                 .build();
     }
